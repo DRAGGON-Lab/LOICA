@@ -14,8 +14,12 @@ class GeneProduct:
         Initial concentration of the gene product in Molar
     degradation_rate : int | float
         Degradation rate of the gene product
-    type\_ : str, optional
+    type_ : str, optional
         Molecular type of the gene product, could be 'PRO' or 'RNA'
+    color : str, optional
+        Matplotlib-compatible color value used when drawing the gene product,
+        including named colors (for example, 'silver') and HEX colors (for
+        example, '#C0C0C0').
     uri : str, optional
         SynBioHub URI
     sbol_comp : SBOL Component, optional
@@ -55,7 +59,13 @@ class Regulator(GeneProduct):
     Child of GeneProduct.
     """
     def __init__(self, name, init_concentration=0, degradation_rate=0, sbol_comp=None, color='lightgreen'):
-        super().__init__(name, init_concentration, degradation_rate, sbol_comp,color='lightgreen')
+        super().__init__(
+            name,
+            init_concentration,
+            degradation_rate,
+            sbol_comp=sbol_comp,
+            color=color,
+        )
         self.sbol_comp = sbol_comp
 
 class Reporter(GeneProduct):
@@ -67,12 +77,18 @@ class Reporter(GeneProduct):
     signal_id : str, optional
         Flapjack ID of the signal that the reporter is associated with.
     color : str, optional
-        Color of the reporter
+        Matplotlib-compatible color value used when drawing the reporter,
+        including named colors and HEX colors (for example, '#00FF00').
     """
     def __init__(self, name, init_concentration=0, degradation_rate=0, signal_id=None, color='w', sbol_comp=None):
-        super().__init__(name, init_concentration, degradation_rate, sbol_comp)
+        super().__init__(
+            name,
+            init_concentration,
+            degradation_rate,
+            sbol_comp=sbol_comp,
+            color=color,
+        )
         self.signal_id = signal_id
-        self.color = color
         self.sbol_comp = sbol_comp
 
 #Producer
